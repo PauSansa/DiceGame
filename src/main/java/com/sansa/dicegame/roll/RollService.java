@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
 public class RollService {
     private final RollRepository rollRepository;
     private final RollToDto toDto;
-
+    private final Random random;
     public RollDto createRoll(User user){
         Roll roll = Roll.builder()
                 .dice1(randomDice())
@@ -25,7 +26,7 @@ public class RollService {
     }
 
     private Integer randomDice() {
-        return (int) Math.floor(Math.random() * 6 + 1);
+        return (random.nextInt(6) +1);
     }
 
 

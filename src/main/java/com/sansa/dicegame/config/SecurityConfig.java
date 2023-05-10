@@ -5,6 +5,7 @@ import com.sansa.dicegame.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,9 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService customUserDetailsService;
+    @Value("${dicegame.cookie.name}")
+    private String cookieName;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -57,7 +61,7 @@ public class SecurityConfig {
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler(){
         return (HttpServletRequest request, HttpServletResponse response, Authentication authentication) ->{
-            CookieUtil.deleteCookie(request,response,"Authorization");
+            CookieUtil.deleteCookie(request,response,cookieName);
             response.sendRedirect("/login");
         };
     }

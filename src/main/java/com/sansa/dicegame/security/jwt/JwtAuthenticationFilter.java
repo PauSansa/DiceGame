@@ -35,8 +35,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         final String jwt;
         final String userEmail;
-        final Optional<String> jwtCookie = getJwtCookie(request);
-        final Optional<String> jwtHeader = getJwtHeader(request);
 
         jwt = getJwtCookie(request).orElseGet(() -> getJwtHeader(request).orElse(null));
 
@@ -65,6 +63,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public Optional<String> getJwtHeader(HttpServletRequest request){
         String authHeader = request.getHeader("Authorization");
+        if(authHeader == null || !authHeader.startsWith("Bearer ")){
+            return Optional.empty();
+        }
         return Optional.of(authHeader.substring(7));
     }
 

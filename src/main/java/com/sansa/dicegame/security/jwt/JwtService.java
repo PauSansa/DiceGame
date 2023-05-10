@@ -16,8 +16,8 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-
-   private static final String SECRET_KEY = "5468566D597133743677397A24432646294A404E635266556A586E5A72347537";
+   @Value("$dicegame.jwt.secret")
+   private String SECRET_KEY;
 
    public String generateToken(
            UserDetails userDetails,

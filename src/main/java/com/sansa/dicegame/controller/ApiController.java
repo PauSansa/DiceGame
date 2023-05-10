@@ -19,7 +19,7 @@ public class ApiController {
     private final RollService rollService;
 
     @DeleteMapping("/rolls")
-    public ResponseEntity<?> deleteAllRolls(){
+    public ResponseEntity<Void> deleteAllRolls(){
         User user = getUser();
         rollService.deleteRollsByUser(user);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -33,7 +33,6 @@ public class ApiController {
 
     @GetMapping("/roll")
     public List<RollDto> getTenRolls(){
-        User user = getUser();
         return rollService.getAllRolls();
     }
 

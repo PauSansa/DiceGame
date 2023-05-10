@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.parser.Authorization;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,6 +38,9 @@ import java.util.Objects;
 public class FrontController {
     private final RollService rollService;
     private final UserToDto userToDto;
+
+    @Value("${dicegame.cookie.name}")
+    private String cookieName;
 
     @GetMapping
     public String home(Model model){
@@ -68,7 +72,7 @@ public class FrontController {
             Model model,
             HttpServletResponse response,
             HttpServletRequest request){
-        CookieUtil.deleteCookie(request,response,"Authorization");
+        CookieUtil.deleteCookie(request,response,cookieName);
         return "redirect:/login";
     }
 
@@ -104,7 +108,7 @@ public class FrontController {
         try {
             ResponseEntity<AuthResponse> authResponse = restTemplate.postForEntity(url, loginRequest, com.sansa.dicegame.payloads.AuthResponse.class);
             String token = Objects.requireNonNull(authResponse.getBody()).getToken();
-            CookieUtil.addCookie(response, "Authorization", token, 86400);
+            CookieUtil.addCookie(response, cookieName, token, 86400);
             return "redirect:/?continue";
         } catch (HttpClientErrorException e){
             return "redirect:/login?error=badcredentials";
@@ -124,7 +128,7 @@ public class FrontController {
         try{
             ResponseEntity<AuthResponse> authResponse = restTemplate.postForEntity(url,registerRequest, com.sansa.dicegame.payloads.AuthResponse.class);
             String token = Objects.requireNonNull(authResponse.getBody()).getToken();
-            CookieUtil.addCookie(response,"Authorization", token, 86400);
+            CookieUtil.addCookie(response,cookieName, token, 86400);
 
             return "redirect:/?continue";
         } catch(HttpClientErrorException e){

@@ -4,7 +4,6 @@ package com.sansa.dicegame.util;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.SerializationUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -14,6 +13,10 @@ import java.util.Base64;
 import java.util.Optional;
 
 public class CookieUtil {
+
+    private CookieUtil(){
+
+    }
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
@@ -29,7 +32,7 @@ public class CookieUtil {
         return Optional.empty();
     }
 
-    public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) throws UnsupportedEncodingException {
+    public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, URLEncoder.encode(value, StandardCharsets.UTF_8));
         cookie.setPath("/");
         cookie.setHttpOnly(true);

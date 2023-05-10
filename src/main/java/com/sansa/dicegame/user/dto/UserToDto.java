@@ -37,10 +37,6 @@ public class UserToDto implements Function<User,UserDto> {
     }
 
     public float calculateWinrate(User user){
-        List<Roll> rolls = rollRepository.findAllByUser(user);
-        float winCount = rolls.stream().filter((roll -> roll.getDice1() + roll.getDice2() == 7))
-                .count();
-
         return (calculateRollsPlayed(user) == 0) ? 0f : (float) calculateWins(user) / calculateRollsPlayed(user) * 100f;
     }
 }
