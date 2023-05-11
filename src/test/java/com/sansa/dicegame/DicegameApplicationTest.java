@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class DicegameApplicationTest {
+class DicegameApplicationTest {
     Calculator underTest = new Calculator();
     @Test
     void thisShouldAddTwoNumbers(){
