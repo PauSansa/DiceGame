@@ -67,14 +67,6 @@ public class FrontController {
         return "allrolls";
     }
 
-    @GetMapping("/logouta")
-    public String logout(
-            Model model,
-            HttpServletResponse response,
-            HttpServletRequest request){
-        CookieUtil.deleteCookie(request,response,cookieName);
-        return "redirect:/login";
-    }
 
     @GetMapping("/login")
     public String login(Model model, @RequestParam(required = false) String error){

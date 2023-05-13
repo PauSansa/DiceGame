@@ -53,7 +53,11 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .logout()
                 .logoutSuccessHandler(logoutSuccessHandler())
-                .permitAll();
+                .permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login");
+
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
