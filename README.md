@@ -16,7 +16,7 @@
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/PauSansa/Dicegame?color=dark-green) ![Stargazers](https://img.shields.io/github/stars/PauSansa/Dicegame?style=social) ![Issues](https://img.shields.io/github/issues/PauSansa/Dicegame) ![License](https://img.shields.io/github/license/PauSansa/Dicegame)
+![Contributors](https://img.shields.io/github/contributors/PauSansa/Dicegame?color=dark-green) [![CodeFactor](https://www.codefactor.io/repository/github/pausansa/dicegame/badge)](https://www.codefactor.io/repository/github/pausansa/dicegame) ![Issues](https://img.shields.io/github/issues/PauSansa/Dicegame) ![License](https://img.shields.io/github/license/PauSansa/Dicegame)
 
 ## Table Of Contents
 
